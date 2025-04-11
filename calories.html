@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Calories Burned Estimator</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+background-color: whitesmoke;
+margin: 0;
+padding: 20px;
+}
+h1 {
+text-align: center;
+}
+label {
+display: block;
+margin: 15px 0 5px;
+}
+input {
+width: 98%;
+padding: 10px;
+margin-bottom: 15px;
+border: 1px solid silver;
+border-radius: 3px;
+}
+button {
+width: 100%;
+padding: 10px;
+background: limegreen;
+color: white;
+border: none;
+border-radius: 3px;
+cursor: pointer;
+}
+button:hover {
+background: seagreen;
+}
+.result {
+margin-top: 20px;
+font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<div>
+<h1>Calories Burned Estimator</h1>
+<label for="running">Running (calories/min):</label>
+<input type="number" id="running" placeholder="Enter minutes per week" min="0"/>
+
+<label for="hiking">Hiking (calories/min):</label>
+<input type="number" id="hiking" placeholder="Enter minutes per week" min="0"/>
+
+<label for="cycling">Cycling (calories/min):</label>
+<input type="number" id="cycling" placeholder="Enter minutes per week" min="0"/>
+
+<label for="swimming">Swimming (calories/min):</label>
+<input type="number" id="swimming" placeholder="Enter minutes per week" min="0"/>
+
+<label for="yoga">Yoga (calories/min):</label>
+<input type="number" id="yoga" placeholder="Enter minutes per week" min="0"/>
+
+<button onclick="calculateCalories()">Estimate Calories Burned</button>
+
+<div class="result" id="result"></div>
+</div>
+
+<script>
+function calculateCalories() {
+	var running = parseFloat(document.getElementById('running').value) || 0;
+	var hiking = parseFloat(document.getElementById('hiking').value) || 0;
+	var cycling = parseFloat(document.getElementById('cycling').value) || 0;
+	var swimming = parseFloat(document.getElementById('swimming').value) || 0;
+	var yoga = parseFloat(document.getElementById('yoga').value) || 0;
+	
+	//Check for negative input
+	if (running < 0 || hiking < 0 || cycling < 0 || swimming < 0 || yoga < 0) {
+		alert("Please enter non-negative number for all activites.");
+		return;
+	}
+	
+	// Estimated Example value
+	var caloriesPerMinute = {running: 10, hiking: 8, cycling: 6, swimming: 7, yoga: 5 };
+	var totalCalories = (running * caloriesPerMinute.running) + (hiking * caloriesPerMinute.hiking)
+	+ (cycling * caloriesPerMinute.cycling) + (swimming * caloriesPerMinute.swimming) + (yoga * caloriesPerMinute.yoga);
+	
+	document.getElementById('result').innerText = 'Total Calories Burned Per Week: ' + totalCalories;
+}
+</script>
+
+</body>
+</html>

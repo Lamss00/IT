@@ -1,0 +1,102 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleep Quality Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            padding: 1em 0;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+        }
+        input[type="number"], input[type="text"] {
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sleep Quality Calculator</h1>
+    </header>
+    <div class="container">
+        <form id="sleepForm">
+            <label for="totalSleep">Total Sleep Time (hours):</label>
+            <input type="number" id="totalSleep" name="totalSleep" required>
+            
+            <label for="deepSleep">Deep Sleep Time (hours):</label>
+            <input type="number" id="deepSleep" name="deepSleep" required>
+            
+            <label for="lightSleep">Light Sleep Time (hours):</label>
+            <input type="number" id="lightSleep" name="lightSleep" required>
+            
+            <input type="submit" value="Calculate Sleep Quality">
+        </form>
+        <div id="result"></div>
+    </div>
+<center>
+<a href="index.html">back</a>
+<center>
+    <script>
+        document.getElementById('sleepForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const totalSleep = parseFloat(document.getElementById('totalSleep').value);
+            const deepSleep = parseFloat(document.getElementById('deepSleep').value);
+            const lightSleep = parseFloat(document.getElementById('lightSleep').value);
+            
+            let sleepQuality = '';
+            
+            if (totalSleep < 7) {
+                sleepQuality = 'Poor sleep quality due to insufficient total sleep time.';
+            } else if (deepSleep < 1.5) {
+                sleepQuality = 'Poor sleep quality due to insufficient deep sleep time.';
+            } else if (lightSleep < 2) {
+                sleepQuality = 'Poor sleep quality due to insufficient light sleep time.';
+            } else {
+                sleepQuality = 'Good sleep quality.';
+            }
+            
+            document.getElementById('result').innerText = sleepQuality;
+        });
+    </script>
+</body>
+</html>

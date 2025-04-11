@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BMI Calculator</title>
+</head>
+<body><center>
+    <h1>BMI Calculator</h1>
+    <form id="bmiForm">
+        <label for="height">Height (cm):</label>
+        <input type="number" id="height" required>
+        <br>
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" required>
+        <br>
+        <button type="submit">Calculate</button>
+    </form>
+    <div class="result-container">
+        <p id="BMI"></p>
+        <p id="bmiAdvice"></p>
+    </div>
+<a href="index.html">back</a>
+<center>
+    <script>
+        document.getElementById('bmiForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            calculateBMI();
+        });
+
+        function calculateBMI() {
+            var heightCm = parseFloat(document.getElementById('height').value);
+            var weight = parseFloat(document.getElementById('weight').value);
+
+            if (heightCm <= 0 || weight <= 0) {
+                if (heightCm <= 0 && weight > 0) {
+                    alert('Invalid height');
+                    return;
+                } else if (heightCm > 0 && weight <= 0) {
+                    alert('Invalid weight');
+                    return;
+                } else if (heightCm <= 0 && weight <= 0) {
+                    alert('Invalid height and weight');
+                    return;
+                }
+            }
+
+            var height = heightCm / 100;
+            var bmi = weight / (height * height);
+
+            document.getElementById('BMI').textContent = "Your BMI is " + bmi.toFixed(2);
+
+            var advice;
+            if (bmi < 18.5) {
+                advice = "You are underweight.";
+            } else if (bmi >= 18.5 && bmi < 25) {
+                advice = "You have a healthy weight.";
+            } else if (bmi >= 25 && bmi < 30) {
+                advice = "You are overweight.";
+            } else {
+                advice = "You are obese.";
+            }
+
+            document.getElementById('bmiAdvice').textContent = advice;
+        }
+    </script>
+</body>
+</html>
